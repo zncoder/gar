@@ -8,20 +8,20 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/zncoder/goar"
+	"github.com/zncoder/gar"
 )
 
 func main() {
 	archiveOpt := flag.Bool("a", false, "pack files to go binary")
-	inspectOpt := flag.Bool("t", false, "inspect goar file")
-	trimOpt := flag.Bool("r", false, "trim goar file to restore the original binary")
+	inspectOpt := flag.Bool("t", false, "inspect gar file")
+	trimOpt := flag.Bool("r", false, "trim gar file to restore the original binary")
 	extractOpt := flag.Bool("e", false, "extract files")
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, `Usage:
-  goar -t <go_binary>
-  goar -a <go_binary> <file>...
-  goar -r <go_binary>
-  goar -e <go_binary> <file>...
+  gar -t <go_binary>
+  gar -a <go_binary> <file>...
+  gar -r <go_binary>
+  gar -e <go_binary> <file>...
 
 `)
 		flag.PrintDefaults()
@@ -60,7 +60,7 @@ func main() {
 }
 
 func inspect(fn string) {
-	fs, err := goar.NewFileSystem(fn)
+	fs, err := gar.NewFileSystem(fn)
 	if err != nil {
 		log.Fatalf("inspect file:%s err:%v", fn, err)
 	}
@@ -73,7 +73,7 @@ func inspect(fn string) {
 }
 
 func archive(binfn string, fns []string) {
-	ar, err := goar.NewArchiver(binfn)
+	ar, err := gar.NewArchiver(binfn)
 	if err != nil {
 		log.Fatalf("new archiver err:%v", err)
 	}
@@ -88,9 +88,9 @@ func archive(binfn string, fns []string) {
 }
 
 func trim(fn string) {
-	fs, err := goar.NewFileSystem(fn)
+	fs, err := gar.NewFileSystem(fn)
 	if err != nil {
-		log.Fatalf("open goar file:%s err:%v", fn, err)
+		log.Fatalf("open gar file:%s err:%v", fn, err)
 	}
 	sz := fs.BinarySize
 	fs.Close()
@@ -102,7 +102,7 @@ func trim(fn string) {
 }
 
 func extract(binfn string, fns []string) {
-	fs, err := goar.NewFileSystem(binfn)
+	fs, err := gar.NewFileSystem(binfn)
 	if err != nil {
 		log.Fatalf("inspect file:%s err:%v", binfn, err)
 	}

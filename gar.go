@@ -1,4 +1,4 @@
-package goar
+package gar
 
 import (
 	"archive/zip"
@@ -13,7 +13,7 @@ import (
 	"sync"
 )
 
-const suffix = "GOAR"
+const suffix = "GAR"
 
 type Archiver struct {
 	f        *os.File
@@ -232,7 +232,7 @@ func initProgFS() {
 	fn := os.Args[0]
 	fs, err := NewFileSystem(fn)
 	if err != nil {
-		panic(fmt.Sprintf("failed to init goar file system from %s, err:%v", fn, err))
+		panic(fmt.Sprintf("failed to init gar file system from %s, err:%v", fn, err))
 	}
 	progFS = fs
 }
