@@ -8,7 +8,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/zncode/goar"
+	"github.com/zncoder/goar"
 )
 
 func main() {
